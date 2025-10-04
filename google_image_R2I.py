@@ -8,8 +8,8 @@ import time
 import torch
 import random
 import numpy as np
-import datetime  # Añadido para X-Browser-Year
-from .google_gen import *  # Ajusta la ruta si es necesario
+import datetime
+from GoogleFX.google_gen import *
 
 class GoogleImagenR2INode:
     @classmethod
@@ -45,4 +45,5 @@ class GoogleImagenR2INode:
                                 reference_image_1=None, reference_image_2=None, reference_image_3=None,
                                 unique_id=None):
         # Delegamos toda la lógica al módulo externo
+
         return generate_and_save_imagesR2I(api, prompt_text, aspect_ratio, candidates_count, seed, save_path, prefix, reference_image_1, reference_image_2, reference_image_3, unique_id)
