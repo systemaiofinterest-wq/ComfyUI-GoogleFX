@@ -8,7 +8,7 @@ import time
 import torch
 import random
 import numpy as np
-from .google_gen import *
+from GoogleFX.google_gen import *
 
 class GoogleImagen35Node:
     @classmethod
@@ -31,4 +31,5 @@ class GoogleImagen35Node:
 
     def generate_fx_35(self, api, prompt_text, aspect_ratio, save_path, prefix, candidates_count, seed):
         # Delegamos toda la lógica al módulo externo
+
         return generate_and_save_images35(api, prompt_text, aspect_ratio, save_path, prefix, candidates_count, seed)
