@@ -8,7 +8,7 @@ import random
 import numpy as np
 from PIL import Image
 import io
-from .google_gen import *
+from GoogleFX.google_gen import *
 
 class GoogleNanoBananaNode:
     @classmethod
@@ -42,4 +42,5 @@ class GoogleNanoBananaNode:
                         reference_image_1=None, reference_image_2=None, reference_image_3=None,
                         unique_id=None):
         # Delegamos toda la lógica al módulo externo
+
         return generate_images(API_KEY, prompt_text, candidates_count, seed, save_path, prefix, reference_image_1, reference_image_2, reference_image_3, unique_id)
