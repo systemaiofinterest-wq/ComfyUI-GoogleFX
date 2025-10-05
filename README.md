@@ -30,3 +30,12 @@ Con 2 imagens
 
 Con 3 imagens
 <img width="1502" height="510" alt="image" src="https://raw.githubusercontent.com/systemaiofinterest-wq/ComfyUI-GoogleFX/refs/heads/main/Google_Nano_Banana__image_3.png" />
+
+
+1. Clone the repository:
+```bash
+cd custom_nodes/
+git clone https://github.com/systemaiofinterest-wq/ComfyUI-GoogleFX.git
+cd ComfyUI-GoogleFX
+pip install -r requirements.txt
+```
