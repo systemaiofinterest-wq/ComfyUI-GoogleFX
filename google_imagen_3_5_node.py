@@ -17,7 +17,7 @@ class GoogleImagen35Node:
             "required": {
                 "api": ("STRING", {"default": "", "multiline": False}),
                 "prompt_text": ("STRING", {"multiline": True, "default": "A futuristic city at sunset"}),
-                "aspect_ratio": (["16:9", "9:16", "1:1"],),
+                "aspect_ratio": (["16:9", "9:16", "1:1", "3:4", "4:3"],),
                 "candidates_count": ("INT", {"default": 4, "min": 1, "max": 4}),
                 "seed": ("INT", {"default": 0, "min": 0, "max": 2147483647}),  # -1 = aleatorio
                 "save_path": ("STRING", {"default": "C:\\Users\\$USERNAME\\Documents\\ComfyUI\\GeneratedImages\\"}),

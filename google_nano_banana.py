@@ -17,6 +17,7 @@ class GoogleNanoBananaNode:
             "required": {
                 "API_KEY": ("STRING", {"default": "", "multiline": False}),
                 "prompt_text": ("STRING", {"multiline": True, "default": "A futuristic city at sunset"}),
+                "aspect_ratio": (["16:9", "9:16", "1:1", "3:4", "4:3"],),
                 "candidates_count": ("INT", {"default": 4, "min": 1, "max": 4}),
                 "seed": ("INT", {"default": 0, "min": 0, "max": 2147483647}),
                 "save_path": ("STRING", {"default": "C:\\Users\\$USERNAME\\Documents\\ComfyUI\\GeneratedImages\\"}),
@@ -37,10 +38,10 @@ class GoogleNanoBananaNode:
     CATEGORY = "Veo Nodes"
     DESCRIPTION = "Nodo unificado: acepta imágenes de ComfyUI, las sube y genera con referencias. Salida única en batch."
 
-    def generate_N2I(self, API_KEY, prompt_text, candidates_count, seed,
+    def generate_N2I(self, API_KEY, prompt_text, aspect_ratio, candidates_count, seed,
                         save_path, prefix,
                         reference_image_1=None, reference_image_2=None, reference_image_3=None,
                         unique_id=None):
         # Delegamos toda la lógica al módulo externo
 
-        return generate_images(API_KEY, prompt_text, candidates_count, seed, save_path, prefix, reference_image_1, reference_image_2, reference_image_3, unique_id)
+        return generate_images(API_KEY, prompt_text, aspect_ratio, candidates_count, seed, save_path, prefix, reference_image_1, reference_image_2, reference_image_3, unique_id)
