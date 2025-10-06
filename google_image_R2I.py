@@ -9,6 +9,7 @@ import torch
 import random
 import numpy as np
 import datetime
+from pathlib import Path
 from GoogleFX.google_gen import *
 
 class GoogleImagenR2INode:
@@ -21,7 +22,6 @@ class GoogleImagenR2INode:
                 "aspect_ratio": (["16:9", "9:16", "1:1", "3:4", "4:3"],),
                 "candidates_count": ("INT", {"default": 4, "min": 1, "max": 4}),
                 "seed": ("INT", {"default": 0, "min": 0, "max": 2147483647}),
-                "save_path": ("STRING", {"default": "C:\\Users\\$USERNAME\\Documents\\ComfyUI\\GeneratedImages\\"}),
                 "prefix": ("STRING", {"default": "imagen_"}),
             },
             "optional": {
@@ -41,9 +41,12 @@ class GoogleImagenR2INode:
 
     
     def generate_R2I(self, api, prompt_text, aspect_ratio, candidates_count, seed,
-                                save_path, prefix,
+                                prefix,
                                 reference_image_1=None, reference_image_2=None, reference_image_3=None,
                                 unique_id=None):
+        # Asegurar directorio de salida
+        comfy_output_dir = Path("output") / "ImageFX"
+        comfy_output_dir.mkdir(parents=True, exist_ok=True)
         # Delegamos toda la lógica al módulo externo
 
-        return generate_and_save_imagesR2I(api, prompt_text, aspect_ratio, candidates_count, seed, save_path, prefix, reference_image_1, reference_image_2, reference_image_3, unique_id)
+        return generate_and_save_imagesR2I(api, prompt_text, aspect_ratio, candidates_count, seed, comfy_output_dir, prefix, reference_image_1, reference_image_2, reference_image_3, unique_id)

@@ -8,6 +8,7 @@ import time
 import torch
 import random
 import numpy as np
+from pathlib import Path
 from GoogleFX.google_gen import *
 
 # Combinamos todas tus opciones en una sola lista, y agregamos "None" al inicio
@@ -79,7 +80,6 @@ class GoogleImagen31Node:
                 "aspect_ratio": (["16:9", "9:16", "1:1", "3:4", "4:3"],),
                 "candidates_count": ("INT", {"default": 4, "min": 1, "max": 4}),
                 "seed": ("INT", {"default": 0, "min": 0, "max": 2147483647}),
-                "save_path": ("STRING", {"default": "C:\\Users\\$USERNAME\\Documents\\ComfyUI\\GeneratedImages\\"}),
                 "prefix": ("STRING", {"default": "imagen_"}),
                 "style_tag": (ALL_STYLES, {"default": "None"}),  # <-- Solo un selector
             }
@@ -89,7 +89,12 @@ class GoogleImagen31Node:
     FUNCTION = "generate_fx_31"
     CATEGORY = "AI Sandbox"
 
-    def generate_fx_31(self, api, prompt_text, aspect_ratio, save_path, prefix, candidates_count, seed, style_tag):
+    
+
+    def generate_fx_31(self, api, prompt_text, aspect_ratio, prefix, candidates_count, seed, style_tag):
+        # Asegurar directorio de salida
+        comfy_output_dir = Path("output") / "ImageFX"
+        comfy_output_dir.mkdir(parents=True, exist_ok=True)
         # Empezamos con el prompt base
         final_prompt = prompt_text.strip()
 
@@ -98,4 +103,4 @@ class GoogleImagen31Node:
             final_prompt += " " + style_tag
 
         # Llamamos a la función externa con el prompt final
-        return generate_and_save_images31(api, final_prompt, aspect_ratio, save_path, prefix, candidates_count, seed)
+        return generate_and_save_images31(api, final_prompt, aspect_ratio, comfy_output_dir, prefix, candidates_count, seed)

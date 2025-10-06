@@ -8,6 +8,7 @@ import time
 import torch
 import random
 import numpy as np
+from pathlib import Path
 from GoogleFX.google_gen import *
 
 class GoogleImagen35Node:
@@ -19,8 +20,7 @@ class GoogleImagen35Node:
                 "prompt_text": ("STRING", {"multiline": True, "default": "A futuristic city at sunset"}),
                 "aspect_ratio": (["16:9", "9:16", "1:1", "3:4", "4:3"],),
                 "candidates_count": ("INT", {"default": 4, "min": 1, "max": 4}),
-                "seed": ("INT", {"default": 0, "min": 0, "max": 2147483647}),  # -1 = aleatorio
-                "save_path": ("STRING", {"default": "C:\\Users\\$USERNAME\\Documents\\ComfyUI\\GeneratedImages\\"}),
+                "seed": ("INT", {"default": 0, "min": 0, "max": 2147483647}),
                 "prefix": ("STRING", {"default": "imagen_"}),
             }
         }
@@ -29,7 +29,10 @@ class GoogleImagen35Node:
     FUNCTION = "generate_fx_35"
     CATEGORY = "AI Sandbox"
 
-    def generate_fx_35(self, api, prompt_text, aspect_ratio, save_path, prefix, candidates_count, seed):
+    def generate_fx_35(self, api, prompt_text, aspect_ratio, prefix, candidates_count, seed):
         # Delegamos toda la lógica al módulo externo
+        # Asegurar directorio de salida
+        comfy_output_dir = Path("output") / "ImageFX"
+        comfy_output_dir.mkdir(parents=True, exist_ok=True)
 
-        return generate_and_save_images35(api, prompt_text, aspect_ratio, save_path, prefix, candidates_count, seed)
+        return generate_and_save_images35(api, prompt_text, aspect_ratio, comfy_output_dir, prefix, candidates_count, seed)
